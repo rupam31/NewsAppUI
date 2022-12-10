@@ -17,13 +17,54 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: kLighterWhite,
-        body: HomeScreen(),
+        body: const HomeScreen(),
+        bottomNavigationBar: BottomNavigationBar(
+          elevation: 0,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: kWhite,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 0 //Ternary Opperator
+                  ? SvgPicture.asset('assets/home_selected_icon.svg')
+                  : SvgPicture.asset('assets/home_unselected_icon.svg'),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 1 //Ternary Opperator
+                  ? SvgPicture.asset('assets/bookmark_selected_icon.svg')
+                  : SvgPicture.asset('assets/bookmark_unselected_icon.svg'),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 2 //Ternary Opperator
+                  ? SvgPicture.asset('assets/notification_selected_icon.svg')
+                  : SvgPicture.asset('assets/notification_unselected_icon.svg'),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 3 //Ternary Opperator
+                  ? SvgPicture.asset('assets/profile_selected_icon.svg')
+                  : SvgPicture.asset('assets/profile_unselected_icon.svg'),
+              label: '',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
@@ -344,6 +385,9 @@ class HomeScreen extends StatelessWidget {
                               'https://media-cdn.tripadvisor.com/media/photo-s/1b/f4/56/f1/aerial-view.jpg',
                             ),
                           ),
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/play_icon.svg',
                         ),
                       ),
                       const SizedBox(
